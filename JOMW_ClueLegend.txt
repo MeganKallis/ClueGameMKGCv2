@@ -1,0 +1,11 @@
+L, Living Room, Card
+D, Den, Card
+B, Bathroom, Card
+V, Video Game Room, Card
+O, Observatory, Card
+C, Computer Room, Card
+K, Kitchen, Card
+A, Darkroom, Card
+G, Green Room, Card
+X, Closet, Other
+W, Walkway, Other
