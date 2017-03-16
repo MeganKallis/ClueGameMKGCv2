@@ -29,7 +29,7 @@ public class JOMW_FileInitTests {
 	public static void setUp() {
 		board = Board.getInstance();
 		// Sets the config files to our layout and legend files
-		board.setConfigFiles("JOMW_ClueLayout.csv", "JOMW_ClueLegend.txt"); 
+		board.setConfigFiles("JOMW_ClueLayout.csv", "JOMW_ClueLegend.txt", ""); 
 		board.initialize();
 	}
 	@Test

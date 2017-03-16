@@ -17,7 +17,7 @@ public class JOMW_BoardAdjTargetTests {
 	@Before
 	public void initialize() {		
 		board = Board.getInstance();
-		board.setConfigFiles("JOMW_ClueLayout.csv", "JOMW_ClueLegend.txt");		
+		board.setConfigFiles("JOMW_ClueLayout.csv", "JOMW_ClueLegend.txt","");		
 		board.initialize();
 		return;
 	}

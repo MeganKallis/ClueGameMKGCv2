@@ -21,6 +21,7 @@ public class Board {
 	private Set<BoardCell> targets;
 	private String boardConfigFile;
 	private String roomConfigFile;
+	private String playerConfigFile;
 	private Set<BoardCell> visited;
 	
 	/*
@@ -218,9 +219,10 @@ public class Board {
 		return getAdjList(getCellAt(row, col));
 	}
 	
-	public void setConfigFiles(String boardFile, String roomFile) {
+	public void setConfigFiles(String boardFile, String roomFile, String playerFile) {
 		boardConfigFile = boardFile;
 		roomConfigFile = roomFile;
+		playerConfigFile = playerFile;
 		return;
 	}
 
