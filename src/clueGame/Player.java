@@ -64,7 +64,7 @@ public class Player {
 	public void setColor(Color color) {
 		this.color = color;
 	}
-	public Card disproveSuggestion(Solotion suggestion){
+	public Card disproveSuggestion(Solution suggestion){
 
 		Card temp = new Card();
 		return temp;

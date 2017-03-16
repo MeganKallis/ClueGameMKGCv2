@@ -4,5 +4,9 @@ Player, Bulbasaur, green, 6, 23
 Player, Squirtle, blue, 4, 17
 Player, Charmander, red, 16, 18
 Player, Oddish, magenta, 0, 6
-Weapon, Pokeball
-Weapon, Different Pokeball
+Weapon, Thunderbolt
+Weapon, Tail-Whip
+Weapon, Razor-Leaf
+Weapon, Aqua-Jet
+Weapon, Flamethrower
+Weapon, Venoshock

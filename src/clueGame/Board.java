@@ -26,7 +26,10 @@ public class Board {
 	private String playerConfigFile;
 	private Set<BoardCell> visited;
 	private Player[] players;
-	private Set<Card> deck;
+	public Set<Card> deck;
+	public int numRooms = 0;
+	public static int numPlayers = 0;
+	public int numWeapons = 0;
 	
 	/*
 	 * Default ctor for the board 
@@ -98,6 +101,8 @@ public class Board {
 						//Create a PERSON Card and add it to the deck
 						Card card = new Card(n[1], CardType.PERSON);
 						deck.add(card);
+						numPlayers++;
+						System.out.println("players: " + numPlayers);
 					}
 					// Add else statement to load other players
 					else {
@@ -106,11 +111,15 @@ public class Board {
 						counter++;
 						Card card = new Card(n[1], CardType.PERSON);
 						deck.add(card);
+						numPlayers++;
+						System.out.println("players: " + numPlayers);
 					}
 				}
 				else if(loadedCardType.equals("Weapon")){
 					Card card = new Card(n[1], CardType.WEAPON);
 					deck.add(card);
+					numWeapons++;
+					System.out.println("weapons: " + numWeapons);
 				}
 				else throw new BadConfigFormatException();
 			}
@@ -148,6 +157,8 @@ public class Board {
 				if(roomType.equals("Card")){
 					Card card = new Card(roomName, CardType.ROOM);
 					deck.add(card);
+					numRooms++;
+					System.out.println("rooms: " + numRooms);
 				}
 			}
 		} catch (FileNotFoundException e) {

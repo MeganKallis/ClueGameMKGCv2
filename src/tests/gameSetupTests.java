@@ -7,6 +7,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import clueGame.Board;
+import clueGame.Card;
+import clueGame.CardType;
 import clueGame.Player;
 
 public class gameSetupTests {
@@ -38,9 +40,42 @@ public class gameSetupTests {
 
 	
 	// Tests for loading/creating the deck of cards
+	// Ensures the deck contains the correct total number of cards
+	// Ensures the deck contains the correct number of each type of card
+	// Ensures deck contains at least one room, one weapon, and one person
 	@Test
 	public void testLoadingCards() {
-		fail("Not yet implemented");
+		int numberOfRooms = board.numRooms;
+		int numberOfWeapons = board.numWeapons;
+		int numberOfPlayers = Board.numPlayers;
+		// Deck contains correct number of cards
+		int expectedNumberOfCards = numberOfRooms + numberOfWeapons + numberOfPlayers;
+		assertEquals(expectedNumberOfCards, board.deck.size());
+		// Deck contains the correct number of each type of card
+		assertEquals(9, numberOfRooms);
+		assertEquals(6, numberOfWeapons);
+		assertEquals(6, numberOfPlayers);
+		// Deck contains at least one room
+		Card kitchenTestCard = new Card("Kitchen", CardType.ROOM); 
+		for (Card c : board.deck) {
+			if (c.equals(kitchenTestCard))
+					assertTrue(board.deck.contains(kitchenTestCard));
+		}
+		// Deck contains at least one player
+		Card eeveeTestCard = new Card("Eevee", CardType.PERSON); 
+		for (Card c : board.deck) {
+			if (c.equals(eeveeTestCard))
+					assertTrue(board.deck.contains(eeveeTestCard));
+		}
+		// Deck contains at least one weapon
+		Card ThunderboltTestCard = new Card("Thunderbolt", CardType.WEAPON); 
+		for (Card c : board.deck) {
+			if (c.equals(ThunderboltTestCard))
+					assertTrue(board.deck.contains(ThunderboltTestCard));
+		}
+		
+		
+		
 	}
 	
 	// Tests for dealing the cards
