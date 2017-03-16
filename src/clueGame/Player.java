@@ -8,7 +8,7 @@ public class Player {
 	private int col;
 	public Color color;
 	
-	public Card disproveSuggestion(Solotion suggestion){
+	public Card disproveSuggestion(Solution suggestion){
 		Card temp = new Card();
 		return temp;
 	}
