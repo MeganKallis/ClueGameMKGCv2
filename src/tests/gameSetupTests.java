@@ -21,7 +21,7 @@ public class gameSetupTests {
 
 	// Tests for loading the people
 	@Test
-	public void testPeople() {
+	public void testLoadingPeople() {
 		fail("Not yet implemented");
 	}
 	
