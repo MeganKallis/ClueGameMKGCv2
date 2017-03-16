@@ -74,13 +74,15 @@ public class gameSetupTests {
 					assertTrue(board.deck.contains(ThunderboltTestCard));
 		}
 		
-		
-		
 	}
 	
 	// Tests for dealing the cards
+	// All cards should be dealt
+	// All players should have roughly the same number of cards
+	// The same card should not be given to >1 player
 	@Test
 	public void testDealingCards() {
-		fail("Not yet implemented");
+		// All cards should be dealt
+		
 	}
 }

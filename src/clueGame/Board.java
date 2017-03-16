@@ -102,7 +102,7 @@ public class Board {
 						Card card = new Card(n[1], CardType.PERSON);
 						deck.add(card);
 						numPlayers++;
-						System.out.println("players: " + numPlayers);
+						//System.out.println("players: " + numPlayers);
 					}
 					// Add else statement to load other players
 					else {
@@ -112,14 +112,14 @@ public class Board {
 						Card card = new Card(n[1], CardType.PERSON);
 						deck.add(card);
 						numPlayers++;
-						System.out.println("players: " + numPlayers);
+						//System.out.println("players: " + numPlayers);
 					}
 				}
 				else if(loadedCardType.equals("Weapon")){
 					Card card = new Card(n[1], CardType.WEAPON);
 					deck.add(card);
 					numWeapons++;
-					System.out.println("weapons: " + numWeapons);
+					//System.out.println("weapons: " + numWeapons);
 				}
 				else throw new BadConfigFormatException();
 			}
@@ -158,7 +158,7 @@ public class Board {
 					Card card = new Card(roomName, CardType.ROOM);
 					deck.add(card);
 					numRooms++;
-					System.out.println("rooms: " + numRooms);
+					//System.out.println("rooms: " + numRooms);
 				}
 			}
 		} catch (FileNotFoundException e) {
