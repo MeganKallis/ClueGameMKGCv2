@@ -24,11 +24,9 @@ public class CR_BoardAdjTargetTests {
 		// Board is singleton, get the only instance and initialize it		
 		board = Board.getInstance();
 		// set the file names to use my config files
-<<<<<<< HEAD
+
 		board.setConfigFiles("CR_ClueLayout.csv", "CR_ClueLegend.txt", "");		
-=======
-		board.setConfigFiles("CR_ClueLayout.csv", "CR_ClueLegend.txt","");		
->>>>>>> fe16038ccca9d231b0d73536c5cd65079d7664e1
+
 		board.initialize();
 	}
 
