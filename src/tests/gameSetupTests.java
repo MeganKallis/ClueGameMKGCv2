@@ -83,6 +83,11 @@ public class gameSetupTests {
 	@Test
 	public void testDealingCards() {
 		// All cards should be dealt
+		fail();
+		// All players should have roughly the same number of cards
+		fail();
+		// The same card should not be given to >1 player
+		fail();
 		
 	}
 }
