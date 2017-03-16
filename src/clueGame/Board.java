@@ -23,6 +23,7 @@ public class Board {
 	private String roomConfigFile;
 	private String playerConfigFile;
 	private Set<BoardCell> visited;
+	private Player[] players;
 	
 	/*
 	 * Default ctor for the board 
@@ -34,6 +35,7 @@ public class Board {
 		adjMatrix = new HashMap<BoardCell, Set<BoardCell>>();
 		targets = new HashSet<BoardCell>();
 		visited = new HashSet<BoardCell>();
+		players = new Player[6];
 	}
 
 	/*
@@ -51,6 +53,7 @@ public class Board {
 		try {
 			this.loadRoomConfig();
 			this.loadBoardConfig();
+			this.loadCardConfig();
 		} catch (BadConfigFormatException e) {
 			e.getMessage();
 		}
@@ -58,6 +61,29 @@ public class Board {
 		return;
 	}
 	
+	public void loadCardConfig() throws BadConfigFormatException {
+		FileReader reader = null;
+		Scanner in = null;
+		
+		try {
+			reader = new FileReader(playerConfigFile);
+			in = new Scanner(reader);
+			while (in.hasNext()) {
+				String line = in.nextLine();
+				String[] n = line.split(", ");
+				String loadedCardType = n[0];
+				if(loadedCardType == "Player"){
+					
+				}
+			}
+		} catch (FileNotFoundException e) {
+			System.out.println("Card config File not found");
+		} finally {
+			in.close();
+		}
+		return;
+	}
+
 	/*
 	 * Load the ClueLegend file into the legend map 
 	 */
@@ -240,5 +266,10 @@ public class Board {
 	
 	public BoardCell getCellAt(int row, int col) {
 		return board[row][col];
+	}
+
+	public Player[] getPlayers() {
+		// TODO Auto-generated method stub
+		return players;
 	}
 }
