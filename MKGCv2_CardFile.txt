@@ -1,0 +1,6 @@
+Player, Pikachu, yellow, 21, 8
+Player, Eevee, orange, 10, 12
+Player, Bulbasaur, green, 6, 23
+Player, Squirtle, blue, 4, 17
+Player, Charmander, red, 16, 18
+Player, Oddish, magenta, 0, 6
