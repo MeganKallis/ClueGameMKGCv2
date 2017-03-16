@@ -1,0 +1,6 @@
+Pikachu,yellow,21,8
+Eevee,orange,10,12
+Bulbasaur,green,6,23
+Squirtle,blue,4,17
+Charmander,red,16,18
+Oddish,purple,0,6
