@@ -3,6 +3,10 @@ package clueGame;
 import java.awt.Color;
 
 public class Player {
+	@Override
+	public String toString() {
+		return "Player [playerName=" + playerName + ", row=" + row + ", col=" + col + ", color=" + color + "]";
+	}
 	private String playerName;
 	private int row;
 	private int col;
@@ -21,6 +25,14 @@ public class Player {
 		color = colo;
 		return;
 	}
+	public void setPlayer(Player p){
+		playerName = p.getPlayerName();
+		row = p.getRow();
+		col = p.getCol();
+		color = p.getColor();
+		return;
+	}
+	
 	
 	public boolean equals(Player p){
 		if(playerName.equals(p.getPlayerName()) && row == p.getRow() && col == p.getCol() && color == p.getColor()){

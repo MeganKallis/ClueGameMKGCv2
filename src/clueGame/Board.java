@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.awt.Color;
+import java.lang.reflect.Field;
 
 import clueGame.BoardCell;
 
@@ -61,6 +63,19 @@ public class Board {
 		return;
 	}
 	
+	public Color convertColor(String strColor) {
+	    Color color; 
+	    try {     
+	        // We can use reflection to convert the string to a color
+	        Field field = Class.forName("java.awt.Color").getField(strColor.trim());     
+	        color = (Color)field.get(null); 
+	    } catch (Exception e) {  
+	        color = null; // Not defined  
+	    }
+	    return color;
+	}
+
+	
 	public void loadCardConfig() throws BadConfigFormatException {
 		FileReader reader = null;
 		Scanner in = null;
@@ -72,9 +87,16 @@ public class Board {
 				String line = in.nextLine();
 				String[] n = line.split(", ");
 				String loadedCardType = n[0];
-				if(loadedCardType == "Player"){
-					
+				if(loadedCardType.equals("Player")){
+					if(n[1].equals("Pikachu")){
+						System.out.println(convertColor(n[2]));
+						Player human = new HumanPlayer(n[1], Integer.parseInt(n[3]), Integer.parseInt(n[4]), convertColor(n[2]));
+						players[0] = human;
+						System.out.println(players[0]);
+					}
 				}
+				// Add else statement to load other players
+				else
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println("Card config File not found");
