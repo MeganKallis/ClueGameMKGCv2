@@ -31,8 +31,8 @@ public class gameSetupTests {
 		assertTrue(board.getPlayers()[5].equals(testPlayer));
 		testPlayer.setPlayer("Pikachu", 21, 8, Color.yellow);
 		assertTrue(board.getPlayers()[0].equals(testPlayer));
-		testPlayer.setPlayer("Evee", 10, 12, Color.orange);
-		assertTrue(board.getPlayers()[5].equals(testPlayer));
+		testPlayer.setPlayer("Eevee", 10, 12, Color.orange);
+		assertTrue(board.getPlayers()[1].equals(testPlayer));
 
 }
 	

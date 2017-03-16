@@ -26,6 +26,7 @@ public class Board {
 	private String playerConfigFile;
 	private Set<BoardCell> visited;
 	private Player[] players;
+	private Card[] deck;
 	
 	/*
 	 * Default ctor for the board 
@@ -83,20 +84,30 @@ public class Board {
 		try {
 			reader = new FileReader(playerConfigFile);
 			in = new Scanner(reader);
+			int counter = 0;
 			while (in.hasNext()) {
 				String line = in.nextLine();
 				String[] n = line.split(", ");
 				String loadedCardType = n[0];
 				if(loadedCardType.equals("Player")){
 					if(n[1].equals("Pikachu")){
-						System.out.println(convertColor(n[2]));
 						Player human = new HumanPlayer(n[1], Integer.parseInt(n[3]), Integer.parseInt(n[4]), convertColor(n[2]));
-						players[0] = human;
-						System.out.println(players[0]);
+						players[counter] = human;
+						counter++;
+						//System.out.println(players[0]);
+					}
+					// Add else statement to load other players
+					else{
+						Player comp = new ComputerPlayer(n[1], Integer.parseInt(n[3]), Integer.parseInt(n[4]), convertColor(n[2]));
+						//System.out.println(comp);
+						players[counter] = comp;
+						counter++;
 					}
 				}
-				// Add else statement to load other players
-				else
+				
+			}
+			for(int i = 0; i < players.length; i++){
+				System.out.println(players[i]);
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println("Card config File not found");
