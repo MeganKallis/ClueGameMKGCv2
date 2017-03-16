@@ -26,7 +26,7 @@ public class Board {
 	private String playerConfigFile;
 	private Set<BoardCell> visited;
 	private Player[] players;
-	private Card[] deck;
+	private Set<Card> deck;
 	
 	/*
 	 * Default ctor for the board 
@@ -39,6 +39,7 @@ public class Board {
 		targets = new HashSet<BoardCell>();
 		visited = new HashSet<BoardCell>();
 		players = new Player[6];
+		deck = new HashSet<Card>();
 	}
 
 	/*
@@ -94,20 +95,27 @@ public class Board {
 						Player human = new HumanPlayer(n[1], Integer.parseInt(n[3]), Integer.parseInt(n[4]), convertColor(n[2]));
 						players[counter] = human;
 						counter++;
-						//System.out.println(players[0]);
+						//Create a PERSON Card and add it to the deck
+						Card card = new Card(n[1], CardType.PERSON);
+						deck.add(card);
 					}
 					// Add else statement to load other players
-					else{
+					else {
 						Player comp = new ComputerPlayer(n[1], Integer.parseInt(n[3]), Integer.parseInt(n[4]), convertColor(n[2]));
-						//System.out.println(comp);
 						players[counter] = comp;
 						counter++;
+						Card card = new Card(n[1], CardType.PERSON);
+						deck.add(card);
 					}
 				}
-				
+				else if(loadedCardType.equals("Weapon")){
+					Card card = new Card(n[1], CardType.WEAPON);
+					deck.add(card);
+				}
+				else throw new BadConfigFormatException();
 			}
-			for(int i = 0; i < players.length; i++){
-				System.out.println(players[i]);
+			for(Card d : deck){
+				System.out.println(d);
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println("Card config File not found");
@@ -137,6 +145,10 @@ public class Board {
 					throw new BadConfigFormatException(message);
 				}
 				legend.put(c, roomName);
+				if(roomType.equals("Card")){
+					Card card = new Card(roomName, CardType.ROOM);
+					deck.add(card);
+				}
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println("Room config File not found :(");

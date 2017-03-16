@@ -1,16 +1,16 @@
 package clueGame;
 
 import java.awt.Color;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Player {
-	@Override
-	public String toString() {
-		return "Player [playerName=" + playerName + ", row=" + row + ", col=" + col + ", color=" + color + "]";
-	}
+	
 	private String playerName;
 	private int row;
 	private int col;
-	public Color color;
+	private Color color;
+	private Set<Card> hand = new TreeSet<Card>();
 	
 	public Player(String pn, int r, int c, Color colo){
 		playerName = pn;
@@ -66,6 +66,10 @@ public class Player {
 	public Card disproveSuggestion(Solotion suggestion){
 		Card temp = new Card();
 		return temp;
+	}
+	@Override
+	public String toString() {
+		return "Player [playerName=" + playerName + ", row=" + row + ", col=" + col + ", color=" + color + "]";
 	}
 	
 }
