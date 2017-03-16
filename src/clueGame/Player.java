@@ -34,6 +34,7 @@ public class Player {
 	}
 	
 	
+
 	public boolean equals(Player p){
 		if(playerName.equals(p.getPlayerName()) && row == p.getRow() && col == p.getCol() && color == p.getColor()){
 			return true;
@@ -64,6 +65,7 @@ public class Player {
 		this.color = color;
 	}
 	public Card disproveSuggestion(Solotion suggestion){
+
 		Card temp = new Card();
 		return temp;
 	}

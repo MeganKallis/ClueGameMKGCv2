@@ -35,6 +35,7 @@ public class gameSetupTests {
 		assertTrue(board.getPlayers()[1].equals(testPlayer));
 
 }
+
 	
 	// Tests for loading/creating the deck of cards
 	@Test

@@ -1,6 +1,6 @@
 package clueGame;
 
-public class Solotion {
+public class Solution {
 	public String person;
 	public String room;
 	public String weapon;

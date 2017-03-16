@@ -290,6 +290,7 @@ public class Board {
 		return getAdjList(getCellAt(row, col));
 	}
 	
+
 	public void setConfigFiles(String boardFile, String roomFile, String playerFile) {
 		boardConfigFile = boardFile;
 		roomConfigFile = roomFile;
