@@ -329,4 +329,8 @@ public class Board {
 		// TODO Auto-generated method stub
 		return players;
 	}
+
+	public void dealDeck() {
+		
+	}
 }

@@ -2,7 +2,7 @@ package clueGame;
 
 import java.awt.Color;
 import java.util.Set;
-import java.util.TreeSet;
+import java.util.HashSet;
 
 public class Player {
 	
@@ -10,7 +10,7 @@ public class Player {
 	private int row;
 	private int col;
 	private Color color;
-	private Set<Card> hand = new TreeSet<Card>();
+	private Set<Card> hand = new HashSet<Card>();
 	
 	public Player(String pn, int r, int c, Color colo){
 		playerName = pn;
@@ -72,6 +72,10 @@ public class Player {
 	@Override
 	public String toString() {
 		return "Player [playerName=" + playerName + ", row=" + row + ", col=" + col + ", color=" + color + "]";
+	}
+	public Set<Card> getHand() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

@@ -26,10 +26,7 @@ public class gameSetupTests {
 	
 	@Before
 	public static void dealDeck(){
-		board = Board.getInstance();
-		// Sets the config files to our layout and legend files
-		board.setConfigFiles("JOMW_ClueLayout.csv", "JOMW_ClueLegend.txt", "MKGCv2_CardFile.txt"); 
-		board.initialize();
+		board.dealDeck();
 	}
 
 	// Tests for loading the people
@@ -92,11 +89,33 @@ public class gameSetupTests {
 	@Test
 	public void testDealingCards() {
 		// All cards should be dealt
-		fail();
+		assertEquals(0, board.deck.size());
 		// All players should have roughly the same number of cards
-		fail();
-		// The same card should not be given to >1 player
-		fail();
+		int handMax = 0;
+		int handMin = board.deck.size();
+		for(int i = 0; i < board.getPlayers().length; i++) {
+			if (board.getPlayers()[i].getHand().size() < handMin) {
+				handMin = board.getPlayers()[i].getHand().size();
+			}
+			if (board.getPlayers()[i].getHand().size() > handMax) {
+				handMax = board.getPlayers()[i].getHand().size();
+			}
+		}
+		System.out.println("Max num in hand: " + handMax);
+		System.out.println("Min num in hand: " + handMin);
+		assertTrue((handMax - handMin) <= 1);
+		// The same card should not be given to > 1 player
+		// Deck contains at least one room
+				Card darkroomTestCard = new Card("Darkroom", CardType.ROOM); 
+				int darkroomTestNum = 0;
+				for (int i = 0; i < board.getPlayers().length; i++) {
+					for (Card c : board.getPlayers()[i].getHand()) {
+						if (c.equals(darkroomTestCard)) {
+							darkroomTestNum++;
+						}
+					}
+				}
+				assertEquals(1, darkroomTestNum);
 		
 	}
 }
