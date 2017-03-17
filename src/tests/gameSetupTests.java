@@ -16,7 +16,7 @@ import clueGame.Solution;
 public class gameSetupTests {
 	private static Board board;
 
-
+	//Setup everything in the board with the config files
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		board = Board.getInstance();
@@ -26,7 +26,7 @@ public class gameSetupTests {
 	}
 
 
-	// Tests for loading the people
+	// LOAD THE PEOPLE TESTS
 	// Checks for correct name, correct starting location, and correct color
 	// Tests human player (Pikachu) and two computer players (Oddish and Eevee)
 	@Test
@@ -42,7 +42,7 @@ public class gameSetupTests {
 }
 
 	
-	// Tests for loading/creating the deck of cards
+	// LOADING/CREATING DECK TESTS
 	// Ensures the deck contains the correct total number of cards
 	// Ensures the deck contains the correct number of each type of card
 	// Ensures deck contains at least one room, one weapon, and one person
@@ -82,7 +82,7 @@ public class gameSetupTests {
 		
 	}
 	
-	// Tests for dealing the cards
+	// DEALING THE CARDS TESTS
 	// All cards should be dealt
 	// All players should have roughly the same number of cards
 	// The same card should not be given to >1 player
@@ -107,7 +107,7 @@ public class gameSetupTests {
 		
 		// The same card should not be given to > 1 player
 		//
-		// Deck contains at least one room
+		// Players' hands contains only one "Darkroom"
 		Card darkroomTestCard = new Card("Darkroom", CardType.ROOM); 
 		int darkroomTestNum = 0;
 		for (int i = 0; i < board.getPlayers().length; i++) {
@@ -117,9 +117,24 @@ public class gameSetupTests {
 				}
 			}
 		}
+		// If "Darkroom" is not in players' hands, check if it's in the solution
+		if(board.getSolution().getRoom().equals(darkroomTestCard)) darkroomTestNum++;
+		System.out.println(darkroomTestNum);
 		assertEquals(1, darkroomTestNum);
-		
-		// TESTS SOLUTION
+		// Players' hands contains only one "Tail-Whip"
+				Card tailwhipTestCard = new Card("Tail-Whip", CardType.WEAPON); 
+				int tailwhipTestNum = 0;
+				for (int i = 0; i < board.getPlayers().length; i++) {
+					for (Card c : board.getPlayers()[i].getHand()) {
+						if (c.equals(tailwhipTestCard)) {
+							tailwhipTestNum++;
+						}
+					}
+				}
+				// If "Tail-Whip" is not in players' hands, check if it's in the solution
+				if(board.getSolution().getWeapon().equals(tailwhipTestCard)) tailwhipTestNum++;
+				assertEquals(1, tailwhipTestNum);
+		// SOLUTION TESTS 
 		//
 		// Tests that solution contains a person
 		assertTrue(board.getSolution().getPerson().getCardType() == CardType.PERSON);
