@@ -2,6 +2,8 @@ package clueGame;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -30,6 +32,7 @@ public class Board {
 	public int numRooms = 0;
 	public static int numPlayers = 0;
 	public int numWeapons = 0;
+	private Solution solution;
 	
 	/*
 	 * Default ctor for the board 
@@ -123,9 +126,7 @@ public class Board {
 				}
 				else throw new BadConfigFormatException();
 			}
-			for(Card d : deck){
-				System.out.println(d);
-			}
+			
 		} catch (FileNotFoundException e) {
 			System.out.println("Card config File not found");
 		} finally {
@@ -331,6 +332,51 @@ public class Board {
 	}
 
 	public void dealDeck() {
+		ArrayList<Card> deckArray = new ArrayList<Card>();
+		int cardCounter = 0;
+		for (Card c : deck){
+			deckArray.add(c);
+		}
+		Collections.shuffle(deckArray);
 		
+		//Setup the solution
+		Card solutionPerson = null;
+		Card solutionRoom = null;
+		Card solutionWeapon = null;
+		for (int i = 0; i <deckArray.size(); i++) {
+			if (deckArray.get(i).getCardType() == CardType.PERSON) {
+				solutionPerson = deckArray.get(i);
+				deckArray.remove(i);
+				break;
+			}
+		}
+		for (int i = 0; i <deckArray.size(); i++) {
+			if (deckArray.get(i).getCardType() == CardType.ROOM) {
+				solutionRoom = deckArray.get(i);
+				deckArray.remove(i);
+				break;
+			}
+		}
+		for (int i = 0; i <deckArray.size(); i++) {
+			if (deckArray.get(i).getCardType() == CardType.WEAPON) {
+				solutionWeapon = deckArray.get(i);
+				deckArray.remove(i);
+				break;
+			}
+		}
+		solution = new Solution(solutionPerson, solutionRoom, solutionWeapon);
+		int personCounter = 0;
+		while(deckArray.size() > 0){
+			players[personCounter].addCard(deckArray.get(0));
+			deckArray.remove(0);
+			if(personCounter == players.length - 1) personCounter = 0;
+			else personCounter++;
+		}
+		deck.clear();
+		
+	}
+
+	public Solution getSolution() {
+		return solution;
 	}
 }

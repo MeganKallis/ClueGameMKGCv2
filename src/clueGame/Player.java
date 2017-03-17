@@ -75,7 +75,12 @@ public class Player {
 	}
 	public Set<Card> getHand() {
 		// TODO Auto-generated method stub
-		return null;
+		return hand;
+	}
+	public void addCard(Card card) {
+		hand.add(card);
+		return;
+		
 	}
 	
 }

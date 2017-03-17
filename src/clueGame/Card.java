@@ -19,7 +19,19 @@ public class Card {
 		// TODO Auto-generated constructor stub
 	}
 
-	public boolean equals(){
-		return true;
+	public boolean equals(Card c){
+		if (this.cardName.equals(c.getCardName()) && this.cardType.equals(c.getCardType())) {
+			return true;
+		}
+		else return false;
+	}
+
+	private String getCardName() {
+		return cardName;
+	}
+
+	public CardType getCardType() {
+		
+		return cardType;
 	}
 }

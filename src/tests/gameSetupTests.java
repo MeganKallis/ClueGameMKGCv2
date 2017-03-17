@@ -11,6 +11,7 @@ import clueGame.Board;
 import clueGame.Card;
 import clueGame.CardType;
 import clueGame.Player;
+import clueGame.Solution;
 
 public class gameSetupTests {
 	private static Board board;
@@ -23,11 +24,7 @@ public class gameSetupTests {
 		board.setConfigFiles("JOMW_ClueLayout.csv", "JOMW_ClueLegend.txt", "MKGCv2_CardFile.txt"); 
 		board.initialize();
 	}
-	
-	@Before
-	public static void dealDeck(){
-		board.dealDeck();
-	}
+
 
 	// Tests for loading the people
 	// Checks for correct name, correct starting location, and correct color
@@ -62,23 +59,26 @@ public class gameSetupTests {
 		assertEquals(6, numberOfWeapons);
 		assertEquals(6, numberOfPlayers);
 		// Deck contains at least one room
-		Card kitchenTestCard = new Card("Kitchen", CardType.ROOM); 
+		Card kitchenTestCard = new Card("Kitchen", CardType.ROOM);
+		boolean testBoolean = false;
 		for (Card c : board.deck) {
-			if (c.equals(kitchenTestCard))
-					assertTrue(board.deck.contains(kitchenTestCard));
+			if (c.equals(kitchenTestCard)) testBoolean = true;
 		}
+		assertTrue(testBoolean);
 		// Deck contains at least one player
+		testBoolean = false;
 		Card eeveeTestCard = new Card("Eevee", CardType.PERSON); 
 		for (Card c : board.deck) {
-			if (c.equals(eeveeTestCard))
-					assertTrue(board.deck.contains(eeveeTestCard));
+			if (c.equals(eeveeTestCard)) testBoolean = true;
 		}
+		assertTrue(testBoolean);
 		// Deck contains at least one weapon
 		Card ThunderboltTestCard = new Card("Thunderbolt", CardType.WEAPON); 
+		testBoolean = false;
 		for (Card c : board.deck) {
-			if (c.equals(ThunderboltTestCard))
-					assertTrue(board.deck.contains(ThunderboltTestCard));
+			if (c.equals(ThunderboltTestCard)) testBoolean = true;
 		}
+		assertTrue(testBoolean);
 		
 	}
 	
@@ -88,11 +88,13 @@ public class gameSetupTests {
 	// The same card should not be given to >1 player
 	@Test
 	public void testDealingCards() {
+		board.dealDeck();
 		// All cards should be dealt
 		assertEquals(0, board.deck.size());
+		
 		// All players should have roughly the same number of cards
 		int handMax = 0;
-		int handMin = board.deck.size();
+		int handMin = 2000;
 		for(int i = 0; i < board.getPlayers().length; i++) {
 			if (board.getPlayers()[i].getHand().size() < handMin) {
 				handMin = board.getPlayers()[i].getHand().size();
@@ -101,21 +103,29 @@ public class gameSetupTests {
 				handMax = board.getPlayers()[i].getHand().size();
 			}
 		}
-		System.out.println("Max num in hand: " + handMax);
-		System.out.println("Min num in hand: " + handMin);
 		assertTrue((handMax - handMin) <= 1);
-		// The same card should not be given to > 1 player
-		// Deck contains at least one room
-				Card darkroomTestCard = new Card("Darkroom", CardType.ROOM); 
-				int darkroomTestNum = 0;
-				for (int i = 0; i < board.getPlayers().length; i++) {
-					for (Card c : board.getPlayers()[i].getHand()) {
-						if (c.equals(darkroomTestCard)) {
-							darkroomTestNum++;
-						}
-					}
-				}
-				assertEquals(1, darkroomTestNum);
 		
+		// The same card should not be given to > 1 player
+		//
+		// Deck contains at least one room
+		Card darkroomTestCard = new Card("Darkroom", CardType.ROOM); 
+		int darkroomTestNum = 0;
+		for (int i = 0; i < board.getPlayers().length; i++) {
+			for (Card c : board.getPlayers()[i].getHand()) {
+				if (c.equals(darkroomTestCard)) {
+					darkroomTestNum++;
+				}
+			}
+		}
+		assertEquals(1, darkroomTestNum);
+		
+		// TESTS SOLUTION
+		//
+		// Tests that solution contains a person
+		assertTrue(board.getSolution().getPerson().getCardType() == CardType.PERSON);
+		// Tests that solution contains a room
+		assertTrue(board.getSolution().getRoom().getCardType() == CardType.ROOM);
+		// Tests that solution contains a weapon
+		assertTrue(board.getSolution().getWeapon().getCardType() == CardType.WEAPON);
 	}
 }
