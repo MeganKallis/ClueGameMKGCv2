@@ -3,6 +3,7 @@ package tests;
 import static org.junit.Assert.*;
 import java.awt.Color;
 
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -17,6 +18,14 @@ public class gameSetupTests {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		board = Board.getInstance();
+		// Sets the config files to our layout and legend files
+		board.setConfigFiles("JOMW_ClueLayout.csv", "JOMW_ClueLegend.txt", "MKGCv2_CardFile.txt"); 
+		board.initialize();
+	}
+	
+	@Before
+	public static void dealDeck(){
 		board = Board.getInstance();
 		// Sets the config files to our layout and legend files
 		board.setConfigFiles("JOMW_ClueLayout.csv", "JOMW_ClueLegend.txt", "MKGCv2_CardFile.txt"); 
