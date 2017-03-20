@@ -98,4 +98,5 @@ public class BoardCell {
 	public DoorDirection getDoorDirection() {
 		return doorDirection;
 	}
+	
 }
