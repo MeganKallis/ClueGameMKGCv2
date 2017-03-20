@@ -14,4 +14,9 @@ public class ComputerPlayer extends Player{
 		BoardCell temp = new BoardCell(0,0,'4');
 		return temp;
 	}
+
+	public void setVisited(int i, int j) {
+		// TODO Auto-generated method stub
+		
+	}
 }
