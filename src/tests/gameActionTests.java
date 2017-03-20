@@ -41,7 +41,11 @@ public class gameActionTests {
 		Set<BoardCell> soln = new HashSet();
 		// Runs pickLocation a thousand times to ensure different random results
 		for (int i = 0; i < 1000; i++) {
-			soln.add(board.getCellAt(computer.pickLocation(temp).getRow(), computer.pickLocation(temp).getCol()));
+			BoardCell testBoardCell = new BoardCell(0, 0, 'c');
+			//System.out.println(board.getCellAt(6, 12));
+			testBoardCell = computer.pickLocation(temp);
+			//System.out.println(testBoardCell);
+			soln.add(board.getCellAt(testBoardCell.getRow(), testBoardCell.getCol()));
 		}
 		// Tests that all five possible targets get chosen at least once
 		assertEquals(5, soln.size());
@@ -59,14 +63,39 @@ public class gameActionTests {
 		soln.clear();
 		
 		for (int i = 0; i < 1000; i++) {
-			soln.add(board.getCellAt(computer.pickLocation(temp).getRow(), computer.pickLocation(temp).getCol()));
+			soln.add(computer.pickLocation(temp));
 		}
+		System.out.println(soln);
 		assertEquals(6, soln.size());
-		// Tests that the just visisted room at (14, 5) is in the solution
+		// Tests that the just visited room at (14, 5) is in the solution
 		assertTrue(soln.contains(board.getCellAt(14, 5)));
 		// Tests that a specific target at (11, 6) is in the solution
 		assertTrue(soln.contains(board.getCellAt(11, 6)));
 
+	}
+	@Test
+	public void makeAccusationTest(){
+		//Creating cards for the solution tests and creating a test Solution
+		Card p = new Card ("Test Person Card", CardType.PERSON);
+		Card r = new Card ("Test Room Card", CardType.ROOM);
+		Card w = new Card ("Test Weapon Card", CardType.WEAPON);
+		Card o = new Card("Other", CardType.PERSON);
+		Solution sol = new Solution(p, r, w);
+		
+		//Testing that test Solution returns true with all correct cards
+		assertEquals(sol, board.getSolution());
+		
+		//Testing that test Solution returns false with wrong person card
+		sol.setSolution(o, r, w);
+		assertNotEquals(sol,board.getSolution());
+		
+		//Testing that test Solution returns false with wrong room card
+		sol.setSolution(p, o, w);
+		assertNotEquals(sol,board.getSolution());
+		
+		//Testing that test Solution returns false with wrong weapon card
+		sol.setSolution(p, r, o);
+		assertNotEquals(sol,board.getSolution());
 		
 	}
 

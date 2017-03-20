@@ -1,22 +1,50 @@
 package clueGame;
 
 import java.awt.Color;
+import java.util.HashSet;
 import java.util.Set;
 
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import clueGame.Board;
+import clueGame.BoardCell;
+import clueGame.Card;
+import clueGame.CardType;
+import clueGame.ComputerPlayer;
+import clueGame.Player;
+import clueGame.Solution;
+
 public class ComputerPlayer extends Player{
+	private int visitedRow;
+	private int visitedCol;
+	private static Board board;
 	public ComputerPlayer(String pn, int r, int c, Color colo) {
 		super(pn, r, c, colo);
+		board = Board.getInstance();
 		// TODO Auto-generated constructor stub
 	}
 	
 	// Method that selects a location from the target list
 	public BoardCell pickLocation(Set<BoardCell> targets){
-		BoardCell temp = new BoardCell(0,0,'4');
-		return temp;
+		for(BoardCell b: targets){
+			if (b.isDoorway() && (b.getRow() != visitedRow || b.getCol() != visitedCol)){
+				return b;
+			}
+		}
+		int counter = 0;
+		int randomNum = (int)(Math.random()*targets.size());
+		for(BoardCell b: targets){
+			if(counter == randomNum) {
+				return b; 
+			}
+			else counter++;
+		}
+		return null;
 	}
 
 	public void setVisited(int i, int j) {
-		// TODO Auto-generated method stub
-		
+		visitedRow = i;
+		visitedCol = j;
 	}
 }

@@ -379,4 +379,7 @@ public class Board {
 	public Solution getSolution() {
 		return solution;
 	}
+	public void setSolution(Card p, Card r, Card w) {
+		solution.setSolution(p, r, w);
+	}
 }
