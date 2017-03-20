@@ -38,5 +38,9 @@ public class Solution {
 		room = r;
 		weapon = w;
 	}
+	@Override
+	public String toString() {
+		return "Solution [person=" + person + ", room=" + room + ", weapon=" + weapon + "]";
+	}
 	
 }

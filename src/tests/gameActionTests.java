@@ -42,9 +42,7 @@ public class gameActionTests {
 		// Runs pickLocation a thousand times to ensure different random results
 		for (int i = 0; i < 1000; i++) {
 			BoardCell testBoardCell = new BoardCell(0, 0, 'c');
-			//System.out.println(board.getCellAt(6, 12));
 			testBoardCell = computer.pickLocation(temp);
-			//System.out.println(testBoardCell);
 			soln.add(board.getCellAt(testBoardCell.getRow(), testBoardCell.getCol()));
 		}
 		// Tests that all five possible targets get chosen at least once
@@ -65,7 +63,6 @@ public class gameActionTests {
 		for (int i = 0; i < 1000; i++) {
 			soln.add(computer.pickLocation(temp));
 		}
-		System.out.println(soln);
 		assertEquals(6, soln.size());
 		// Tests that the just visited room at (14, 5) is in the solution
 		assertTrue(soln.contains(board.getCellAt(14, 5)));
@@ -82,20 +79,23 @@ public class gameActionTests {
 		Card o = new Card("Other", CardType.PERSON);
 		Solution sol = new Solution(p, r, w);
 		
+		
+		board.setSolution(p, r, w);
+		
 		//Testing that test Solution returns true with all correct cards
-		assertEquals(sol, board.getSolution());
+		assertTrue(sol.equals(board.getSolution()));
 		
 		//Testing that test Solution returns false with wrong person card
 		sol.setSolution(o, r, w);
-		assertNotEquals(sol,board.getSolution());
+		assertFalse(sol.equals(board.getSolution()));
 		
 		//Testing that test Solution returns false with wrong room card
 		sol.setSolution(p, o, w);
-		assertNotEquals(sol,board.getSolution());
+		assertFalse(sol.equals(board.getSolution()));
 		
 		//Testing that test Solution returns false with wrong weapon card
 		sol.setSolution(p, r, o);
-		assertNotEquals(sol,board.getSolution());
+		assertFalse(sol.equals(board.getSolution()));
 		
 	}
 

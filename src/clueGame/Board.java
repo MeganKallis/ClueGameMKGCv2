@@ -46,6 +46,7 @@ public class Board {
 		visited = new HashSet<BoardCell>();
 		players = new Player[6];
 		deck = new HashSet<Card>();
+		solution = new Solution();
 	}
 
 	/*
@@ -364,7 +365,7 @@ public class Board {
 				break;
 			}
 		}
-		solution = new Solution(solutionPerson, solutionRoom, solutionWeapon);
+		solution.setSolution(solutionPerson, solutionRoom, solutionWeapon);
 		int personCounter = 0;
 		while(deckArray.size() > 0){
 			players[personCounter].addCard(deckArray.get(0));
@@ -381,5 +382,6 @@ public class Board {
 	}
 	public void setSolution(Card p, Card r, Card w) {
 		solution.setSolution(p, r, w);
+
 	}
 }
