@@ -8,7 +8,8 @@ public class ComputerPlayer extends Player{
 		super(pn, r, c, colo);
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	// Method that selects a location from the target list
 	public BoardCell pickLocation(Set<BoardCell> targets){
 		BoardCell temp = new BoardCell(0,0,'4');
 		return temp;
