@@ -92,6 +92,7 @@ public class ComputerPlayer extends Player{
 		return newSuggestion;
 
 	}
+	
 
 	public void setUnseenWeapon(Set<Card> theUnseen) {
 		unseenWeapon = theUnseen;	

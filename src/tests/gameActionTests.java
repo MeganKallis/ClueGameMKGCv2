@@ -100,7 +100,7 @@ public class gameActionTests {
 	}
 	
 	@Test
-	public void createSuggestion(){
+	public void createSuggestionTest(){
 		//Creating cards for the suggestion tests and creating a test Solution
 		Card p = new Card ("Pikachu", CardType.PERSON);
 		Card r = new Card ("Kitchen", CardType.ROOM);
@@ -153,4 +153,36 @@ public class gameActionTests {
 		assertTrue(soln.contains(p));
 		assertTrue(soln.contains(person));
 	}
+	
+	@Test
+	public void disproveSuggestionTest(){
+		//Creating cards for the disprove suggestion tests and creating a test Solution
+		ComputerPlayer testPlayer = new ComputerPlayer("Billy", 20, 22, Color.cyan);
+		Card p = new Card ("Pikachu", CardType.PERSON);
+		Card r = new Card ("Kitchen", CardType.ROOM);
+		Card w = new Card ("Tail-Whip", CardType.WEAPON);
+		Solution suggestion = new Solution(p, r, w);
+		// Adds matching card to player's hand
+		testPlayer.addCard(p);
+		// If player has only one matching card it should be returned
+		assertEquals(p, testPlayer.disproveSuggestion(suggestion));
+		// Adds another matching card to player's hand
+		testPlayer.addCard(w);
+		//Test multiple times to ensure that disproveSuggestion behavior is random
+		Set<Card> soln = new HashSet();
+		for(int i = 0; i < 100; i++){
+			soln.add(testPlayer.disproveSuggestion(suggestion));
+		}
+		assertEquals(soln.size(), 2);
+		assertTrue(soln.contains(p));
+		assertTrue(soln.contains(w));
+	
+		ComputerPlayer testPlayer2 = new ComputerPlayer("Mandy", 20, 22, Color.red);
+		Card q = new Card ("Eevee", CardType.PERSON);
+		// Adds non-matching card to player's hand
+		testPlayer.addCard(q);
+		// If player has no matching cards, null should be returned
+		assertNull(testPlayer2.disproveSuggestion(suggestion));
+	}
+	
 }
