@@ -14,6 +14,7 @@ import clueGame.BoardCell;
 import clueGame.Card;
 import clueGame.CardType;
 import clueGame.ComputerPlayer;
+import clueGame.HumanPlayer;
 import clueGame.Player;
 import clueGame.Solution;
 
@@ -183,6 +184,35 @@ public class gameActionTests {
 		testPlayer.addCard(q);
 		// If player has no matching cards, null should be returned
 		assertNull(testPlayer2.disproveSuggestion(suggestion));
+	}
+	
+	@Test
+	public void handleSuggestionTest(){
+		for (int i = 0; i < board.getPlayers().length; i++) {
+			System.out.println(board.getPlayers()[i]);
+		}
+		// Setup solution
+		Card p = new Card ("Pikachu", CardType.PERSON);
+		Card r = new Card ("Kitchen", CardType.ROOM);
+		Card w = new Card ("Tail-Whip", CardType.WEAPON);
+		Solution suggestion = new Solution(p, r, w);
+		// Setup player1 to have no matching cards
+		Card a = new Card ("Bulbasaur", CardType.PERSON);
+		board.setPlayerCard(0, a);
+		// Setup player2 to have no matching cards
+		Card b = new Card ("Oddish", CardType.PERSON);
+		board.setPlayerCard(1, b);
+		
+		// Tests if suggestion no one can disprove returns null
+		board.handleSuggestion(suggestion, "Pikachu");
+		
+		// Changes solution so accuser player has matching card
+		suggestion.setSolution(b, r, w);
+		// Tests if suggestion only accusing player can disprove returns null
+		board.handleSuggestion(suggestion, "Eevee");
+		
+		// 
+		
 	}
 	
 }
