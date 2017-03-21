@@ -98,5 +98,56 @@ public class gameActionTests {
 		assertFalse(sol.equals(board.getSolution()));
 		
 	}
+	
+	@Test
+	public void createSuggestion(){
+		//Creating cards for the suggestion tests and creating a test Solution
+		Card p = new Card ("Pikachu", CardType.PERSON);
+		Card r = new Card ("Kitchen", CardType.ROOM);
+		Card w = new Card ("Tail-Whip", CardType.WEAPON);
+		Solution suggestion = new Solution(p, r, w);
+		ComputerPlayer testPlayer = new ComputerPlayer("Billy", 21, 23, Color.cyan);
+		board.setSuggestion(p, r, w);
+		
+		//Test that the suggestion is in the same room as the player
+		assertEquals(testPlayer.suggestion().getRoom().getCardName(), board.getLegend().get(board.getCellAt(testPlayer.getRow(), testPlayer.getCol()).getInitial()));
+		
+		
+		//Test only one weapon possibility
+		Set<Card> theUnseen = new HashSet<Card>();
+		theUnseen.add(w);
+		testPlayer.setUnseenWeapon(theUnseen);
+		assertEquals(w, testPlayer.suggestion().getWeapon());
+		
+		//Test multiple weapons that expect a random suggestion
+		Set<Card> soln = new HashSet();
+		Card weapon = new Card("Flamethrower", CardType.WEAPON);
+		theUnseen.add(weapon);
+		
+		for(int i = 0; i < 100; i++){
+			soln.add(testPlayer.suggestion().getWeapon());
+		}
+		assertEquals(soln.size(), 2);
+		assertTrue(soln.contains(w));
+		assertTrue(soln.contains(weapon));
 
+		
+		//Test only one weapon possibility
+		theUnseen.clear();
+		theUnseen.add(p);
+		testPlayer.setUnseenPersons(theUnseen);
+		assertEquals(p, testPlayer.suggestion().getPerson());
+		
+		//Test multiple weapons that expect a random suggestion
+		soln.clear();
+		Card person = new Card("Eevee", CardType.PERSON);
+		theUnseen.add(person);
+		
+		for(int i = 0; i < 100; i++){
+			soln.add(testPlayer.suggestion().getPerson());
+		}
+		assertEquals(soln.size(), 2);
+		assertTrue(soln.contains(p));
+		assertTrue(soln.contains(person));
+	}
 }

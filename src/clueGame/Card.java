@@ -26,7 +26,7 @@ public class Card {
 		else return false;
 	}
 
-	private String getCardName() {
+	public String getCardName() {
 		return cardName;
 	}
 

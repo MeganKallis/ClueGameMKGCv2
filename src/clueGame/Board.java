@@ -33,6 +33,7 @@ public class Board {
 	public static int numPlayers = 0;
 	public int numWeapons = 0;
 	private Solution solution;
+	private Solution suggestion;
 	
 	/*
 	 * Default ctor for the board 
@@ -47,6 +48,7 @@ public class Board {
 		players = new Player[6];
 		deck = new HashSet<Card>();
 		solution = new Solution();
+		suggestion = new Solution();
 	}
 
 	/*
@@ -383,5 +385,13 @@ public class Board {
 	public void setSolution(Card p, Card r, Card w) {
 		solution.setSolution(p, r, w);
 
+	}
+
+	public void setSuggestion(Card p, Card r, Card w) {
+		suggestion.setSolution(p, r, w);
+	}
+
+	public Solution getSuggestion() {
+		return suggestion;
 	}
 }

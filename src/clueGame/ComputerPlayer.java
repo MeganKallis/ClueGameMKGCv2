@@ -19,9 +19,13 @@ public class ComputerPlayer extends Player{
 	private int visitedRow;
 	private int visitedCol;
 	private static Board board;
+	private Set<Card> unseenWeapon;
+	private Set<Card> unseenPersons;
 	public ComputerPlayer(String pn, int r, int c, Color colo) {
 		super(pn, r, c, colo);
 		board = Board.getInstance();
+		unseenWeapon = new HashSet<Card>();
+		unseenPersons = new HashSet<Card>();
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -46,5 +50,19 @@ public class ComputerPlayer extends Player{
 	public void setVisited(int i, int j) {
 		visitedRow = i;
 		visitedCol = j;
+	}
+
+	public Solution suggestion() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setUnseenWeapon(Set<Card> theUnseen) {
+		unseenWeapon = theUnseen;	
+	}
+
+	public void setUnseenPersons(Set<Card> theUnseen) {
+		unseenPersons = theUnseen;
+		
 	}
 }
