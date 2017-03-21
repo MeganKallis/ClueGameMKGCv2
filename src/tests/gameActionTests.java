@@ -188,30 +188,50 @@ public class gameActionTests {
 	
 	@Test
 	public void handleSuggestionTest(){
+		/*
 		for (int i = 0; i < board.getPlayers().length; i++) {
 			System.out.println(board.getPlayers()[i]);
 		}
+		*/
 		// Setup solution
 		Card p = new Card ("Pikachu", CardType.PERSON);
 		Card r = new Card ("Kitchen", CardType.ROOM);
 		Card w = new Card ("Tail-Whip", CardType.WEAPON);
 		Solution suggestion = new Solution(p, r, w);
-		// Setup player1 to have no matching cards
+		// Setup player1 (human as Pikachu) to have no matching cards
 		Card a = new Card ("Bulbasaur", CardType.PERSON);
 		board.setPlayerCard(0, a);
-		// Setup player2 to have no matching cards
-		Card b = new Card ("Oddish", CardType.PERSON);
-		board.setPlayerCard(1, b);
+		// Setup player2 (computer as Bulbasaur) to have no matching cards
+		Card b = new Card ("Library", CardType.ROOM);
+		board.setPlayerCard(2, b);
 		
 		// Tests if suggestion no one can disprove returns null
-		board.handleSuggestion(suggestion, "Pikachu");
+		assertNull(board.handleSuggestion(suggestion, "Pikachu"));
 		
-		// Changes solution so accuser player has matching card
-		suggestion.setSolution(b, r, w);
 		// Tests if suggestion only accusing player can disprove returns null
-		board.handleSuggestion(suggestion, "Eevee");
+		suggestion.setSolution(p, b, w); // Changes solution so accuser player has matching card
+		assertNull(board.handleSuggestion(suggestion, "Bulbasaur"));
 		
-		// 
+		//Tests if only human can disprove suggestion
+		suggestion.setSolution(a, r, w);
+		assertEquals(a, board.handleSuggestion(suggestion, "Bulbasaur"));
+		
+		//Tests if only human can disprove suggestion, but human is accuser
+		assertNull(board.handleSuggestion(suggestion, "Pikachu"));
+		
+		//Tests if two players can disprove, correct player returns answer
+		// Setup player 3 (computer Squirtle) to have a matching card
+		board.setPlayerCard(3, r);
+		// Setup player 4 (computer Charmander) to have a matching card
+		board.setPlayerCard(4, w);
+		suggestion.setSolution(p, r, w);
+		assertEquals(r, board.handleSuggestion(suggestion, "Oddish"));
+		
+		assertEquals(r, board.handleSuggestion(suggestion, "Eevee"));
+		
+		// Tests if human and another player can disprove, other player is next in list, ensure other player returns answer
+		suggestion.setSolution(a, r, w);
+		assertEquals(r, board.handleSuggestion(suggestion, "Bulbasaur"));
 		
 	}
 	

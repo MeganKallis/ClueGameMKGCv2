@@ -394,4 +394,32 @@ public class Board {
 	public Solution getSuggestion() {
 		return suggestion;
 	}
+
+	public void setPlayerCard(int i, Card a) {
+		players[i].addCard(a);
+		
+	}
+
+	public Card handleSuggestion(Solution suggestion, String name) {
+		//System.out.println("The suggestion is " + suggestion + " and the accuser is " + name);
+		int j = 0;
+		for(int i = 0; i < players.length; i++){
+			if(name.equals(players[i].getPlayerName())) {
+				j = i;
+				break;
+			}
+		}
+		//System.out.println(name + " is at index " + j);
+		Card answer = null;
+		int start = 0;
+		if (j == 5) start = 0;
+		else start = j + 1;
+		for(int i = start; i != j; i++){
+			answer = players[i].disproveSuggestion(suggestion);
+			//System.out.println(players[i].getPlayerName() + " has " + answer);
+			if(answer != null) return answer;
+			if(i == players.length - 1) i = -1;
+		}
+		return answer;
+	}
 }

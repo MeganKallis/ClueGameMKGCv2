@@ -66,6 +66,7 @@ public class Player {
 	}
 	public Card disproveSuggestion(Solution suggestion){
 		Set<Card> disproveOptions = new HashSet<Card>();
+		disproveOptions.clear();
 		for (Card c : hand) {
 			if (c.equals(suggestion.getPerson()) || c.equals(suggestion.getRoom()) || c.equals(suggestion.getWeapon())) {
 				disproveOptions.add(c);
