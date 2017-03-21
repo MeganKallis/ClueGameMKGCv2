@@ -106,11 +106,19 @@ public class gameActionTests {
 		Card r = new Card ("Kitchen", CardType.ROOM);
 		Card w = new Card ("Tail-Whip", CardType.WEAPON);
 		Solution suggestion = new Solution(p, r, w);
-		ComputerPlayer testPlayer = new ComputerPlayer("Billy", 21, 23, Color.cyan);
+		ComputerPlayer testPlayer = new ComputerPlayer("Billy", 20, 22, Color.cyan);
 		board.setSuggestion(p, r, w);
 		
+		Set<Card> theUnseenWeapon = new HashSet<Card>();
+		Set<Card> theUnseenPersons = new HashSet<Card>();
+		theUnseenWeapon.add(w);
+		theUnseenPersons.add(p);
+		testPlayer.setUnseenWeapon(theUnseenWeapon);
+		testPlayer.setUnseenPersons(theUnseenPersons);
+		
 		//Test that the suggestion is in the same room as the player
-		assertEquals(testPlayer.suggestion().getRoom().getCardName(), board.getLegend().get(board.getCellAt(testPlayer.getRow(), testPlayer.getCol()).getInitial()));
+		System.out.println(testPlayer.makeSuggestion());
+		assertEquals(testPlayer.makeSuggestion().getRoom().getCardName(), board.getLegend().get(board.getCellAt(testPlayer.getRow(), testPlayer.getCol()).getInitial()));
 		
 		
 		//Test only one weapon possibility
@@ -118,34 +126,31 @@ public class gameActionTests {
 		theUnseen.add(w);
 		System.out.println(theUnseen);
 		testPlayer.setUnseenWeapon(theUnseen);
-		assertEquals(w, testPlayer.suggestion().getWeapon());
+		assertEquals(w, testPlayer.makeSuggestion().getWeapon());
 		
 		//Test multiple weapons that expect a random suggestion
 		Set<Card> soln = new HashSet();
 		Card weapon = new Card("Flamethrower", CardType.WEAPON);
-		theUnseen.add(weapon);
+		theUnseenWeapon.add(weapon);
 		
 		for(int i = 0; i < 100; i++){
-			soln.add(testPlayer.suggestion().getWeapon());
+			soln.add(testPlayer.makeSuggestion().getWeapon());
 		}
 		assertEquals(soln.size(), 2);
 		assertTrue(soln.contains(w));
 		assertTrue(soln.contains(weapon));
 
 		
-		//Test only one weapon possibility
-		theUnseen.clear();
-		theUnseen.add(p);
-		testPlayer.setUnseenPersons(theUnseen);
-		assertEquals(p, testPlayer.suggestion().getPerson());
+		//Test only one person possibility
+		assertEquals(p, testPlayer.makeSuggestion().getPerson());
 		
 		//Test multiple weapons that expect a random suggestion
 		soln.clear();
 		Card person = new Card("Eevee", CardType.PERSON);
-		theUnseen.add(person);
+		theUnseenPersons.add(person);
 		
 		for(int i = 0; i < 100; i++){
-			soln.add(testPlayer.suggestion().getPerson());
+			soln.add(testPlayer.makeSuggestion().getPerson());
 		}
 		assertEquals(soln.size(), 2);
 		assertTrue(soln.contains(p));
