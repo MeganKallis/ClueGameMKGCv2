@@ -52,7 +52,7 @@ public class ComputerPlayer extends Player{
 		visitedCol = j;
 	}
 
-	public Solution makeSuggestion() {
+	public Solution makeSuggestion(Board b) {
 		Card wSuggestion= null;
 		Card pSuggestion = null;
 		Card rSuggestion = null;
@@ -65,6 +65,7 @@ public class ComputerPlayer extends Player{
 			for (Card c : unseenWeapon) {
 				if (counter == rand) {
 					wSuggestion = c;
+					break;
 				}
 				else counter++;
 			}
@@ -78,17 +79,13 @@ public class ComputerPlayer extends Player{
 			for (Card c : unseenPersons) {
 				if (counter == rand) {
 					pSuggestion = c;
+					break;
 				}
 				else counter++;
 			}
 			
 		// Set room part of suggestion
-			System.out.println(this.getRow());
-			System.out.println(this.getCol());
-			System.out.println(board.getCellAt(this.getRow(), this.getCol()));
-		//System.out.println(board.getLegend().get((board.getCellAt(this.getRow(), this.getCol()).getInitial())));
-		rSuggestion = new Card(board.getLegend().get(board.getCellAt(this.getRow(), this.getCol()).getInitial()), CardType.ROOM);
-		System.out.println("After choosing weapon");
+		rSuggestion = new Card(b.getLegend().get(b.getCellAt(this.getRow(), this.getCol()).getInitial()), CardType.ROOM);
 		// Create suggestion
 		Solution newSuggestion = new Solution(pSuggestion, rSuggestion, wSuggestion);
 		

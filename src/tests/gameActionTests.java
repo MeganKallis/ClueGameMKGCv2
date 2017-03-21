@@ -117,16 +117,13 @@ public class gameActionTests {
 		testPlayer.setUnseenPersons(theUnseenPersons);
 		
 		//Test that the suggestion is in the same room as the player
-		System.out.println(testPlayer.makeSuggestion());
-		assertEquals(testPlayer.makeSuggestion().getRoom().getCardName(), board.getLegend().get(board.getCellAt(testPlayer.getRow(), testPlayer.getCol()).getInitial()));
+		assertEquals(testPlayer.makeSuggestion(board).getRoom().getCardName(), board.getLegend().get(board.getCellAt(testPlayer.getRow(), testPlayer.getCol()).getInitial()));
 		
 		
 		//Test only one weapon possibility
-		Set<Card> theUnseen = new HashSet<Card>();
-		theUnseen.add(w);
-		System.out.println(theUnseen);
-		testPlayer.setUnseenWeapon(theUnseen);
-		assertEquals(w, testPlayer.makeSuggestion().getWeapon());
+		theUnseenWeapon.add(w);
+		testPlayer.setUnseenWeapon(theUnseenWeapon);
+		assertEquals(w, testPlayer.makeSuggestion(board).getWeapon());
 		
 		//Test multiple weapons that expect a random suggestion
 		Set<Card> soln = new HashSet();
@@ -134,7 +131,7 @@ public class gameActionTests {
 		theUnseenWeapon.add(weapon);
 		
 		for(int i = 0; i < 100; i++){
-			soln.add(testPlayer.makeSuggestion().getWeapon());
+			soln.add(testPlayer.makeSuggestion(board).getWeapon());
 		}
 		assertEquals(soln.size(), 2);
 		assertTrue(soln.contains(w));
@@ -142,7 +139,7 @@ public class gameActionTests {
 
 		
 		//Test only one person possibility
-		assertEquals(p, testPlayer.makeSuggestion().getPerson());
+		assertEquals(p, testPlayer.makeSuggestion(board).getPerson());
 		
 		//Test multiple weapons that expect a random suggestion
 		soln.clear();
@@ -150,7 +147,7 @@ public class gameActionTests {
 		theUnseenPersons.add(person);
 		
 		for(int i = 0; i < 100; i++){
-			soln.add(testPlayer.makeSuggestion().getPerson());
+			soln.add(testPlayer.makeSuggestion(board).getPerson());
 		}
 		assertEquals(soln.size(), 2);
 		assertTrue(soln.contains(p));
