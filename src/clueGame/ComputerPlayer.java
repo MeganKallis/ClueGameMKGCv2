@@ -53,7 +53,7 @@ public class ComputerPlayer extends Player{
 	}
 
 	public Solution suggestion() {
-		// TODO Auto-generated method stub
+		System.out.println(unseenWeapon.iterator().next());
 		return null;
 	}
 

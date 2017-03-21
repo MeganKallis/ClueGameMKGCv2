@@ -116,6 +116,7 @@ public class gameActionTests {
 		//Test only one weapon possibility
 		Set<Card> theUnseen = new HashSet<Card>();
 		theUnseen.add(w);
+		System.out.println(theUnseen);
 		testPlayer.setUnseenWeapon(theUnseen);
 		assertEquals(w, testPlayer.suggestion().getWeapon());
 		
