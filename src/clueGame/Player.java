@@ -65,9 +65,26 @@ public class Player {
 		this.color = color;
 	}
 	public Card disproveSuggestion(Solution suggestion){
-
-		Card temp = new Card();
-		return temp;
+		Set<Card> disproveOptions = new HashSet<Card>();
+		for (Card c : hand) {
+			if (c.equals(suggestion.getPerson()) || c.equals(suggestion.getRoom()) || c.equals(suggestion.getWeapon())) {
+				disproveOptions.add(c);
+			}
+		}
+		if (disproveOptions.size() == 0) return null;
+		else {
+			// Choose random option in disproveOptions set
+			
+			int counter = 0;
+			int rand = (int)(Math.random() * disproveOptions.size());
+			for (Card c : disproveOptions) {
+				if (counter == rand) {
+					return c;
+				}
+				else counter++;
+			}
+		}
+		return null;
 	}
 	@Override
 	public String toString() {
