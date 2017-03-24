@@ -88,29 +88,6 @@ public class GUIControl extends JPanel {
 		return panel;
 	}
 
-	private JPanel createNamePanel() {
-		 	
-		 	// Use a grid layout, 1 row, 2 elements (label, text)
-		 	JPanel panel = new JPanel();
-			panel.setLayout(new GridLayout(1,2));
-
-		 	JLabel nameLabel = new JLabel("Name");
-			name = new JTextField(20);
-			panel.add(nameLabel);
-			panel.add(name);
-			panel.setBorder(new TitledBorder (new EtchedBorder(), "Who are you?"));
-			return panel;
-	}
-	 
-	private JPanel createButtonPanels() {
-		// no layout specified, so this is flow
-		JButton agree = new JButton("I agree");
-		JButton disagree = new JButton("I disagree");
-		JPanel panel = new JPanel();
-		panel.add(agree);
-		panel.add(disagree);
-		return panel;
-	}
 	
 	public static void main(String[] args) {
 		// Create a JFrame with all the normal functionality
